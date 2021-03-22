@@ -1,0 +1,24 @@
+/** Estilos sobreescritos */
+.g-cartografia-flecha-derecha,
+.g-cartografia-pin#ctrlTest {
+    color: #536DFE !important;
+}
+
+.m-control.activated>button {
+    color: rgb(255, 0, 0) !important;
+}
+
+/** Estilos propios*/
+.info {
+    position: absolute;
+    width: 60%;
+    padding: 5px;
+    top: 10px;
+    left: 20%;
+    background: rgba(245, 245, 245, 0.8);
+    font-size: large;
+    border-radius: 5px;
+    border-style: dashed;
+    border-width: 2px;
+    text-align: center;
+}

@@ -1,0 +1,32 @@
+{
+  "name": "api-cnig-create-plugin",
+  "author": "IGN",
+  "version": "1.0.0",
+  "description": "CLI tool to generate API CNIG plugins",
+  "keywords": [
+    "map",
+    "mapping",
+    "tool",
+    "plugin",
+    "ign",
+    "api-cnig"
+  ],
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": "git://https://github.com/IGNCNIG/APICNIG-CreatePlugin"
+  },
+  "license": "EUPL",
+  "bugs": {
+    "url": "https://github.com/IGNCNIG/APICNIG-CreatePlugin/issues"
+  },
+  "bin": {
+    "api-cnig-create-plugin": "compile-utils/tasks/index.js"
+  },
+  "dependencies": {
+    "inquirer": "^6.3.1",
+    "chalk": "^2.4.2",
+    "fs-extra": "^5.0.0",
+    "handlebars": "^4.3.0"
+  }
+}
