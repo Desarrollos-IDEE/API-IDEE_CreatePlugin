@@ -1,7 +1,7 @@
 # api-cnig-create-plugin
 [![npm version](https://img.shields.io/npm/v/api-cnig-create-plugin.svg)](https://www.npmjs.com/package/api-cnig-create-plugin)
 
-Herramienta para el desarrollo de plugins en [API-CORE](https://github.com/administradorcnig/APICore).
+Herramienta para el desarrollo de plugins en [API-CORE](https://github.com/IGN-CNIG/API-CNIG). 
 
 **Requisitos e instalación de dependencias**
 
