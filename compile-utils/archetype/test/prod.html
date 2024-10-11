@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="api-core" content="yes">
-    <title>{{archetype.plugin.name}} Production TEST</title>
-    <link href="https://componentes.cnig.es/api-core/assets/css/apiign.ol.min.css" rel="stylesheet" />
-    <link href="../dist/{{archetype.plugin.id}}.ol.min.css" rel="stylesheet" />
+    <meta name="mapea" content="yes">
+    <title>Basic Production TEST</title>
+    <link href="https://mapea-lite.desarrollo.guadaltel.es/api-core/assets/css/apiign.ol.min.css" rel="stylesheet" />
+    <link href="../dist/basic.ol.min.css" rel="stylesheet" />
     <style rel="stylesheet">
         html,
         body {
@@ -23,14 +23,14 @@
 
 <body>
     <div id="mapjs" class="container"></div>
-    <script type="text/javascript" src="https://componentes.cnig.es/api-core/js/apiign.ol.min.js"></script>
-    <script type="text/javascript" src="https://componentes.cnig.es/api-core/js/configuration.js"></script>
-    <script type="text/javascript" src="../dist/{{archetype.plugin.id}}.ol.min.js"></script>
+    <script type="text/javascript" src="https://mapea-lite.desarrollo.guadaltel.es/api-core/js/apiign.ol.min.js"></script>
+    <script type="text/javascript" src="https://mapea-lite.desarrollo.guadaltel.es/api-core/js/configuration.js"></script>
+    <script type="text/javascript" src="../dist/basic.ol.min.js"></script>
     <script type="text/javascript">
         const map = M.map({
             container: 'mapjs',
         });
-        const mp = new M.plugin.{{archetype.plugin.name}}();
+        const mp = new M.plugin.Basic();
         map.addPlugin(mp);
     </script>
 </body>
