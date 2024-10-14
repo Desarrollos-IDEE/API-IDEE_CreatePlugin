@@ -2,7 +2,7 @@
   "name": "api-cnig-create-plugin",
   "author": "IGN-CNIG",
   "version": "1.1.0",
-  "description": "CLI tool to generate API CNIG plugins",
+  "description": " Herramienta CLI para generar complementos API CNIG - CLI tool to generate API CNIG plugins",
   "keywords": [
     "map",
     "mapping",
