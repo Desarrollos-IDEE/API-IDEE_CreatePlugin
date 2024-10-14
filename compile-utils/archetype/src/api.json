@@ -1,37 +1,49 @@
 {
   "url": {
-    "name": "{{archetype.plugin.name}}",
+    "name": "basic",
     "separator": "*"
   },
-  "constructor": "M.plugin.{{archetype.plugin.name}}",
-  "parameters": [],
+  "constructor": "M.plugin.Basic",
+  "parameters": [{
+    "type": "object",
+    "properties": [{
+      "type": "simple",
+      "name": "position",
+      "possibleValues": ["TL", "TR", "BL", "BR"],
+      "position": 0
+    }, {
+      "type": "boolean",
+      "name": "collapsed",
+      "position": 1
+    }, {
+      "type": "boolean",
+      "name": "collapsible",
+      "position": 2
+    }, {
+      "type": "simple",
+      "name": "tooltip",
+      "position": 3
+    }, {
+      "type": "boolean",
+      "name": "isDraggable",
+      "position": 4
+    }]
+  }],
   "files": {
     "ol": {
-      "scripts": [],
-      "styles": []
+      "scripts": ["basic.ol.min.js"],
+      "styles": ["basic.ol.min.css"]
     }
   },
   "metadata": {
-    "uuid_plugin": "",
-    "uuid_version_plugin": "",
-    "version_ficha_metadatos": "",
-    "name": "{{archetype.plugin.name}}",
-    "description": "Description of the plugin",
-    "text": "A full text about plugin",
+    "name": "Basic",
+    "description": "Plugin básico",
+    "text": "Plantilla de plugin básico",
     "version": "1.0.0",
-    "date": "{{date}}",
-    "author": "",
+    "date": "Agosto 2024",
+    "author": "Guadaltel",
     "org": "",
-    "tags": "api-core,plugin",
-    "icon": "./facade/assets/icons/icons.svg",
-    "buttons": [
-      { "title": "", "description": "", "querySelector": "" },
-      { "title": "", "description": "", "querySelector": "" }
-    ],
-    "dependencies": {
-      "modules": ["", ""],
-      "plugins": [{ "uuid": "", "name": "" }],
-      "services": [{ "name": "", "description": "" }]
-    }
+    "tags": "cnig,plugin",
+    "icon": "./facade/assets/icons/icons.svg"
   }
 }
