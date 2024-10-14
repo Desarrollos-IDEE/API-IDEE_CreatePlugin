@@ -7,24 +7,39 @@ Herramienta para el desarrollo de plugins en [API-CORE](https://github.com/IGN-C
 
 * Node.js (version >=8.x.x)
 ## Instalación de la herramienta
-Realizamos la instalación de forma global para disponer de la herramienta en cualquier parte de nuestro equipo:
+
+Realizamos la instalación en la carpeta donde queramos crear nuestra extensión (plugin):
+
+```shell
+$ npm i api-cnig-create-plugin
+```
+
+Para hacer la instalación de forma global para disponer de la herramienta en cualquier parte de nuestro equipo:
 
 ```shell
 $ npm install -g api-cnig-create-plugin
 ```
 ## Creación de plugins
 **1. Creación de plugin base**  
+
 Tarea que crea la estructura para un nuevo plugin:  
+```shell
+$ npx api-cnig-create-plugin
+```
+
+Si hemos elegido la forma global de instalación:  
 ```shell
 $ api-cnig-create-plugin
 ```
+
 Solicitará el nombre del plugin, así como la versión de API-CORE sobre la que se desee trabajar. También nos preguntará si queremos que se instalen automáticamente las dependencias del plugin.
 > :point_right:  <a> Para la guía de desarrollo, supondremos que hemos proporcionado el nombre de **'miPlugin'** </a>  
 
 Creará la estructura de directorios y los ficheros necesarios para la construcción de un plugin dentro de una carpeta con el nombre '_miplugin_' en el lugar donde se haya ejecutado la herramienta.
 Este plugin es autocontenido y ya contiene los scripts de pruebas y compilación, e incluye una funcionalidad básica de ejemplo 'Hola mundo'.
 
-En este punto, **deberemos desarrollar la funcionalidad específica de nuestro plugin**. Para ello, la [guía de desarrollo](https://github.com/administradorcnig/APICore/wiki/Gu%C3%ADa-de-desarrollo-de-plugins) entra en detalle acerca de los métodos que lo forman y qué debe incluir cada uno.
+En este punto, **deberemos desarrollar la funcionalidad específica de nuestro plugin**. Para ello, la [guía de desarrollo](https://github.com/IGN-CNIG/API-CNIG/wiki/9.-Gu%C3%ADa-de-desarrollo) entra en detalle acerca de los métodos que lo forman y qué debe incluir cada uno.
+
 Si es necesaria la instalación de alguna dependencia (p.e. _lodash_), puede realizarse de forma habitual, ejecutando dentro del directorio del plugin el siguiente comando:
 ```shell
 $ npm install --save lodash
@@ -43,6 +58,8 @@ npm start
 http://localhost:6123
 ```  
 Y se nos abrirá la página _'dev.html'_.
+
+En el caso de necesitar cambiar algún parámetro de arrancado del servidor (puerto, IP permitidas, ...), se realizará desde el archivo webpack.development.config  en la sección "devServer" 
 
 
 **2.- Check plugin**  
