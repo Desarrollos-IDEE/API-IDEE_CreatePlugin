@@ -5,14 +5,14 @@ import 'assets/css/{{archetype.plugin.id}}';
 import {{archetype.plugin.name}}Control from './{{archetype.plugin.id}}control';
 import api from '../../api.json';
 
-export default class {{archetype.plugin.name}} extends M.Plugin {
+export default class {{archetype.plugin.name}} extends IDEE.Plugin {
   /**
    * @classdesc
    * Main facade plugin object. This class creates a plugin
    * object which has an implementation Object
    *
    * @constructor
-   * @extends {M.Plugin}
+   * @extends {IDEE.Plugin}
    * @param {Object} impl implementation object
    * @api stable
    */
@@ -21,14 +21,14 @@ export default class {{archetype.plugin.name}} extends M.Plugin {
     /**
      * Facade of the map
      * @private
-     * @type {M.Map}
+     * @type {IDEE.Map}
      */
     this.map_ = null;
 
     /**
      * Array of controls
      * @private
-     * @type {Array<M.Control>}
+     * @type {Array<IDEE.Control>}
      */
     this.controls_ = [];
 
@@ -45,16 +45,16 @@ export default class {{archetype.plugin.name}} extends M.Plugin {
    *
    * @public
    * @function
-   * @param {M.Map} map the map to add the plugin
+   * @param {IDEE.Map} map the map to add the plugin
    * @api stable
    */
   addTo(map) {
     this.controls_.push(new {{archetype.plugin.name}}Control());
     this.map_ = map;
     // panel para agregar control - no obligatorio
-    this.panel_ = new M.ui.Panel('panel{{archetype.plugin.name}}', {
+    this.panel_ = new IDEE.ui.Panel('panel{{archetype.plugin.name}}', {
       collapsible: true,
-      position: M.ui.position.TR,
+      position: IDEE.ui.position.TR,
       collapsedButtonClass: 'g-cartografia-flecha-izquierda',
     });
     this.panel_.addControls(this.controls_);
