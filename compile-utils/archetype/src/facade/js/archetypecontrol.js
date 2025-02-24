@@ -5,20 +5,20 @@
 import {{archetype.plugin.name}}ImplControl from 'impl/{{archetype.plugin.id}}control';
 import template from 'templates/{{archetype.plugin.id}}';
 
-export default class {{archetype.plugin.name}}Control extends M.Control {
+export default class {{archetype.plugin.name}}Control extends IDEE.Control {
   /**
    * @classdesc
    * Main constructor of the class. Creates a PluginControl
    * control
    *
    * @constructor
-   * @extends {M.Control}
+   * @extends {IDEE.Control}
    * @api stable
    */
   constructor() {
     // 1. checks if the implementation can create PluginControl
-    if (M.utils.isUndefined({{archetype.plugin.name}}ImplControl)) {
-      M.exception('La implementación usada no puede crear controles {{archetype.plugin.name}}Control');
+    if (IDEE.utils.isUndefined({{archetype.plugin.name}}ImplControl)) {
+      IDEE.exception('La implementación usada no puede crear controles {{archetype.plugin.name}}Control');
     }
     // 2. implementation of this control
     const impl = new {{archetype.plugin.name}}ImplControl();
@@ -35,23 +35,23 @@ export default class {{archetype.plugin.name}}Control extends M.Control {
    *
    * @public
    * @function
-   * @param {M.Map} map to add the control
+   * @param {IDEE.Map} map to add the control
    * @api stable
    */
   createView(map) {
-    if (!M.template.compileSync) { // JGL: retrocompatibilidad API-CORE
-      M.template.compileSync = (string, options) => {
+    if (!IDEE.template.compileSync) { // JGL: retrocompatibilidad API-CORE
+      IDEE.template.compileSync = (string, options) => {
         let templateCompiled;
         let templateVars = {};
         let parseToHtml;
-        if (!M.utils.isUndefined(options)) {
-          templateVars = M.utils.extends(templateVars, options.vars);
+        if (!IDEE.utils.isUndefined(options)) {
+          templateVars = IDEE.utils.extends(templateVars, options.vars);
           parseToHtml = options.parseToHtml;
         }
         const templateFn = Handlebars.compile(string);
         const htmlText = templateFn(templateVars);
         if (parseToHtml !== false) {
-          templateCompiled = M.utils.stringToHtml(htmlText);
+          templateCompiled = IDEE.utils.stringToHtml(htmlText);
         } else {
           templateCompiled = htmlText;
         }
@@ -60,7 +60,7 @@ export default class {{archetype.plugin.name}}Control extends M.Control {
     }
 
     return new Promise((success, fail) => {
-      const html = M.template.compileSync(template);
+      const html = IDEE.template.compileSync(template);
       // Añadir código dependiente del DOM
       success(html);
     });
@@ -116,7 +116,7 @@ export default class {{archetype.plugin.name}}Control extends M.Control {
    *
    * @public
    * @function
-   * @param {M.Control} control to compare
+   * @param {IDEE.Control} control to compare
    * @api stable
    */
   equals(control) {

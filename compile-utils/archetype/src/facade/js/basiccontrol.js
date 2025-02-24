@@ -6,19 +6,19 @@ import BasicImplControl from 'impl/basiccontrol';
 import template from 'templates/basic';
 import { getValue } from './i18n/language';
 
-export default class BasicControl extends M.Control {
+export default class BasicControl extends IDEE.Control {
   /**
    * @classdesc
    * Constructor de la clase. Crea un control BasicControl
    *
    * @constructor
-   * @extends {M.Control}
+   * @extends {IDEE.Control}
    * @api stable
    */
   constructor(isDraggable) {
     // 1. Comprueba si la implementación puede crear el control
-    if (M.utils.isUndefined(BasicImplControl)) {
-      M.exception(getValue('exceptions.impl'));
+    if (IDEE.utils.isUndefined(BasicImplControl)) {
+      IDEE.exception(getValue('exceptions.impl'));
     }
     // 2. Crea la implementación del control
     const impl = new BasicImplControl();
@@ -37,12 +37,12 @@ export default class BasicControl extends M.Control {
    *
    * @public
    * @function
-   * @param {M.Map} map Mapa al que se añade el control
+   * @param {IDEE.Map} map Mapa al que se añade el control
    * @api stable
    */
   createView(map) {
     return new Promise((success, fail) => {
-      const html = M.template.compileSync(template, {
+      const html = IDEE.template.compileSync(template, {
         vars: {
           translations: {
             title: getValue('title'),
@@ -52,7 +52,7 @@ export default class BasicControl extends M.Control {
       });
 
       if (this.isDraggable_) {
-        M.utils.draggabillyPlugin(this.getPanel(), '#m-basic-title');
+        IDEE.utils.draggabillyPlugin(this.getPanel(), '#m-basic-title');
       }
       success(html);
     });
@@ -63,7 +63,7 @@ export default class BasicControl extends M.Control {
    *
    * @public
    * @function
-   * @param {M.Control} control control para comparar
+   * @param {IDEE.Control} control control para comparar
    * @api stable
    */
   equals(control) {
