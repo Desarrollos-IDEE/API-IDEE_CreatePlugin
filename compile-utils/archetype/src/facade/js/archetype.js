@@ -1,8 +1,8 @@
 /**
- * @module M/plugin/{{archetype.plugin.name}}
+ * @module IDEE/plugin/{{archetype.plugin.name}}
  */
 import 'assets/css/{{archetype.plugin.id}}';
-import {{archetype.plugin.name}}Control from './{{archetype.plugin.id}}control';
+import {{archetype.plugin.name}} Control from './{{archetype.plugin.id}} control';
 import api from '../../api.json';
 
 export default class {{archetype.plugin.name}} extends IDEE.Plugin {

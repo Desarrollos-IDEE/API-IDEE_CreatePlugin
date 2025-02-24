@@ -1,5 +1,5 @@
 /**
- * @module M/control/{{archetype.plugin.name}}Control
+ * @module IDEE/control/{{archetype.plugin.name}}Control
  */
 
 import {{archetype.plugin.name}}ImplControl from 'impl/{{archetype.plugin.id}}control';

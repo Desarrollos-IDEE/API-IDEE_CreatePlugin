@@ -1,5 +1,5 @@
 /**
- * @module M/impl/control/{{archetype.plugin.name}}Control
+ * @module IDEE/impl/control/{{archetype.plugin.name}}Control
  */
 export default class {{archetype.plugin.name}}Control extends IDEE.impl.Control {
   /**

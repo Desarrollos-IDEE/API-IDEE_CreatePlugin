@@ -1,5 +1,5 @@
 /**
- * @module M/plugin/Basic
+ * @module IDEE/plugin/Basic
  */
 import '../assets/css/basic';
 import '../assets/css/fonts';
