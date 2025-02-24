@@ -1,5 +1,5 @@
 /**
- * @module M/impl/control/BasicControl
+ * @module IDEE/impl/control/BasicControl
  */
 export default class BasicControl extends IDEE.impl.Control {
   /**

@@ -1,5 +1,5 @@
 /**
- * @module M/control/BasicControl
+ * @module IDEE/control/BasicControl
  */
 
 import BasicImplControl from 'impl/basiccontrol';
