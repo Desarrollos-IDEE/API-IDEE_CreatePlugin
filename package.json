@@ -1,27 +1,27 @@
 {
-  "name": "api-cnig-create-plugin",
-  "author": "IGN-CNIG",
-  "version": "1.1.0",
-  "description": " Herramienta CLI para generar complementos API CNIG - CLI tool to generate API CNIG plugins",
+  "name": "api-idee-create-plugin",
+  "author": "IDEE",
+  "version": "1.1.1",
+  "description": " Herramienta CLI para generar complementos API-IDEE - CLI tool to generate API-IDEE plugins",
   "keywords": [
     "map",
     "mapping",
     "tool",
     "plugin",
-    "ign",
-    "api-cnig"
+    "IDEE",
+    "api-idee"
   ],
   "homepage": "",
   "repository": {
     "type": "git",
-    "url": "git://https://github.com/IGN-CNIG/APICNIG-CreatePlugin"
+    "url": "git://https://github.com/Desarrollos-IDEE/API-IDEE_CreatePlugin"
   },
   "license": "EUPL",
   "bugs": {
-    "url": "https://github.com/IGN-CNIG/APICNIG-CreatePlugin/issues"
+    "url": "https://github.com/Desarrollos-IDEE/API-IDEE_CreatePlugin/issues"
   },
   "bin": {
-    "api-cnig-create-plugin": "compile-utils/tasks/index.js"
+    "api-idee-create-plugin": "compile-utils/tasks/index.js"
   },
   "dependencies": {
     "inquirer": "^6.3.1",
