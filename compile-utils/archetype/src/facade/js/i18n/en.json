@@ -1,6 +1,6 @@
 {
   "exception": {
-    "impl": "The implementation used cannot create Basic controls."
+    "impl": "The implementation used cannot create Archetype controls."
   },
   "textHelp": {
     "help1": "Example text 1.",

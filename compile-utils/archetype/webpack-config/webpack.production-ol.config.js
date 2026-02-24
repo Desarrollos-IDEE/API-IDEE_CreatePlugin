@@ -8,12 +8,13 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 
 const PJSON_PATH = path.resolve(__dirname, '..', 'package.json');
 const pjson = require(PJSON_PATH);
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'production',
   entry: {
-    'basic.ol.min': path.resolve(__dirname, '..', 'src', 'index.js'),
-    [`basic-${pjson.version}.ol.min`]: path.resolve(__dirname, '..', 'src', 'index.js'),
+    '{{archetype.plugin.id}}.ol.min': path.resolve(__dirname, '..', 'src', 'index-ol.js'),
+    [`{{archetype.plugin.id}}-${pjson.version}.ol.min`]: path.resolve(__dirname, '..', 'src', 'index-ol.js'),
   },
   output: {
     path: path.resolve(__dirname, '..', 'dist'),
@@ -67,8 +68,11 @@ module.exports = {
   optimization: {
     emitOnErrors: false,
     minimizer: [
-      new OptimizeCssAssetsPlugin(),
+      new OptimizeCssAssetsPlugin({
+        parallel: 1,
+      }),
       new TerserPlugin({
+        parallel: 1,
         terserOptions: {
           sourceMap: true,
         },
@@ -80,6 +84,9 @@ module.exports = {
     //   version: pjson.version,
     //   regex: /([A-Za-z]+)(\..*)/,
     // }),
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
@@ -93,10 +100,11 @@ module.exports = {
         {
           from: 'src/api.json',
           to: 'api.json',
-        }, {
-          from: 'src/facade/assets/images',
-          to: 'images',
-        },
+        }
+        // , {
+        //   from: 'src/facade/assets/images',
+        //   to: 'images',
+        // },
       ],
     }),
   ],

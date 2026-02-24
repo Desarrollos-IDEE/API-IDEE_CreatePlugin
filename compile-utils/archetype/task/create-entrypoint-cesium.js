@@ -4,7 +4,7 @@ const fs = require('fs-extra');
 const SRC_PATH = path.resolve(__dirname, '..', 'src');
 const DIST_PATH = path.resolve(__dirname, '..', 'dist');
 const FACADE_PATH = path.resolve(SRC_PATH, 'facade', 'js');
-const IMPL_PATH = path.resolve(SRC_PATH, 'impl', 'ol', 'js');
+const IMPL_PATH = path.resolve(SRC_PATH, 'impl', 'cesium', 'js');
 
 const files = [];
 const namespaces = [];
@@ -62,6 +62,6 @@ uniqueNS.forEach((ns) => {
 
 const contentEntryPoint = `${imports}\n${createNS}${exportedClasses}`;
 
-fs.writeFileSync(path.join(SRC_PATH, 'index.js'), contentEntryPoint);
+fs.writeFileSync(path.join(SRC_PATH, 'index-cesium.js'), contentEntryPoint);
 fs.removeSync(DIST_PATH);
 fs.ensureDirSync(DIST_PATH);
