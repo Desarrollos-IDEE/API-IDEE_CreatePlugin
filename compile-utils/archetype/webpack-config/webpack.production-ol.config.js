@@ -54,7 +54,8 @@ module.exports = {
       {
         test: /\.css$/,
         loader: MiniCssExtractPlugin.loader,
-      }, {
+      },
+      {
         test: /\.css$/,
         loader: 'css-loader',
       },
@@ -62,6 +63,14 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|svg)$/,
         exclude: /node_modules/,
         type: 'asset/inline',
+      },
+      {
+        test: /.(png|svg)$/i,
+        exclude: /node_modules/,
+        type: "asset/resource",
+        generator: {
+          filename: "images/[name][ext]",
+        },
       },
     ],
   },
@@ -100,8 +109,8 @@ module.exports = {
         {
           from: 'src/api.json',
           to: 'api.json',
-        }
-        // , {
+        },
+        // {
         //   from: 'src/facade/assets/images',
         //   to: 'images',
         // },
