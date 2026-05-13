@@ -1,11 +1,11 @@
 @font-face {
-font-family: 'basic';
-src: url('../fonts/basic.eot?12225572');
-src: url('../fonts/basic.eot?12225572#iefix') format('embedded-opentype'),
-        url('../fonts/basic.woff2?12225572') format('woff2'),
-        url('../fonts/basic.woff?12225572') format('woff'),
-        url('../fonts/basic.ttf?12225572') format('truetype'),
-        url('../fonts/basic.svg?12225572#basic') format('svg');
+font-family: '{{archetype.plugin.id}}';
+src: url('../fonts/{{archetype.plugin.id}}.eot?12225572');
+src: url('../fonts/{{archetype.plugin.id}}.eot?12225572#iefix') format('embedded-opentype'),
+        url('../fonts/{{archetype.plugin.id}}.woff2?12225572') format('woff2'),
+        url('../fonts/{{archetype.plugin.id}}.woff?12225572') format('woff'),
+        url('../fonts/{{archetype.plugin.id}}.ttf?12225572') format('truetype'),
+        url('../fonts/{{archetype.plugin.id}}.svg?12225572#{{archetype.plugin.id}}') format('svg');
 font-weight: normal;
 font-style: normal;
 }
@@ -14,13 +14,13 @@ font-style: normal;
 /*
 @media screen and (-webkit-min-device-pixel-ratio:0) {
 @font-face {
-    font-family: 'basic';
-    src: url('../font/basic.svg?12225572#basic') format('svg');
+    font-family: '{{archetype.plugin.id}}';
+    src: url('../fonts/{{archetype.plugin.id}}.svg?12225572#{{archetype.plugin.id}}') format('svg');
 }
 }
 */
 [class^="icon-"]:before, [class*=" icon-"]:before {
-    font-family: "basic";
+    font-family: "{{archetype.plugin.id}}";
     font-style: normal;
     font-weight: normal;
     speak: never;
@@ -54,6 +54,6 @@ font-style: normal;
     /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
-.icon-basic-wrench:before {
+.icon-{{archetype.plugin.id}}-wrench:before {
     content: "\e800";
 }

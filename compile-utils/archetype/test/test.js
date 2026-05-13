@@ -1,4 +1,4 @@
-import Basic from 'facade/basic';
+import {{archetype.plugin.name}} from 'facade/{{archetype.plugin.id}}';
 
 // IDEE.language.setLang('es');
 // IDEE.language.setLang('en');
@@ -8,7 +8,7 @@ const map = IDEE.map({
 });
 window.map = map;
 
-const mp = new Basic({
+const mp = new {{archetype.plugin.name}}({
   position: 'TL', // TR, BR, TL, BL
   collapsed: true,
   collapsible: true,

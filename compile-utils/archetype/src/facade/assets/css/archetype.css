@@ -1,24 +1,69 @@
-/** Estilos sobreescritos */
-.g-cartografia-flecha-derecha,
-.g-cartografia-pin#ctrlTest {
-    color: #536DFE !important;
-}
-
-.m-control.activated>button {
-    color: rgb(255, 0, 0) !important;
-}
-
 /** Estilos propios*/
-.info {
+
+.m-areas>div.m-area>div.m-panel.m-plugin-{{archetype.plugin.id}}.collapsed {
+    max-height: 40px;
+}
+
+.m-areas>div.m-area>div.m-panel.m-plugin-{{archetype.plugin.id}}.opened {
+    width: max-content;
+}
+
+.m-areas>div.m-area>div.m-plugin-{{archetype.plugin.id}}.collapsed>button.m-panel-btn {
+    background-color: #71a7d3 !important;
+    font-family: '{{archetype.plugin.id}}' !important;
+}
+
+.m-areas>div.m-area>div.m-plugin-{{archetype.plugin.id}}.opened>button.m-panel-btn {
+    background-color: white !important;
+    color: #71a7d3 !important;
+}
+
+.m-areas>div.m-area.m-left>div.m-plugin-{{archetype.plugin.id}}.opened>button.m-panel-btn {
     position: absolute;
-    width: 60%;
-    padding: 5px;
-    top: 10px;
-    left: 20%;
-    background: rgba(245, 245, 245, 0.8);
-    font-size: large;
-    border-radius: 5px;
-    border-style: dashed;
-    border-width: 2px;
+    right: -40px;
+    background-color: #71a7d3;
+}
+
+.m-areas>div.m-area.m-left>div.m-plugin-{{archetype.plugin.id}}.opened.no-collapsible {
+    border-radius: 4px;
+}
+
+.m-areas>div.m-area.m-right>div.m-plugin-{{archetype.plugin.id}}.opened>button.m-panel-btn {
+    position: absolute;
+    left: -40px;
+    background-color: #71a7d3;
+}
+
+.m-areas>div.m-area>div.m-plugin-{{archetype.plugin.id}}.opened>button.m-panel-btn.opened-left {
+    position: absolute;
+    right: -2.53rem;
+    left: unset !important;
+    color: #71a7d3;
+}
+
+.m-areas>div.m-area>div.m-plugin-{{archetype.plugin.id}}.opened>button.m-panel-btn.opened-right {
+    position: absolute;
+    left: -2.53rem;
+    right: unset !important;
+    color: #71a7d3;
+}
+
+#div-contenedor-m-{{archetype.plugin.id}} {
+    display: block;
+}
+
+/*********************
+     TITLE
+*********************/
+
+.m-control.m-container.m-{{archetype.plugin.id}}>div.title {
+    color: #fff !important;
+    background-color: #71a7d3;
+    font-family: 'Muli',
+        'sans-serif' !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    font-size: 15px;
+    height: 39px;
+    line-height: 40px;
     text-align: center;
 }

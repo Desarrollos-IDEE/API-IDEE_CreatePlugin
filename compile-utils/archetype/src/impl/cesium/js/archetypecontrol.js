@@ -1,7 +1,7 @@
 /**
- * @module IDEE/impl/control/BasicControl
+ * @module IDEE/impl/control/{{archetype.plugin.name}}Control
  */
-export default class BasicControl extends IDEE.impl.Control {
+export default class {{archetype.plugin.name}}Control extends IDEE.impl.Control {
   /**
    * Esta función añade el control al mapa
    *

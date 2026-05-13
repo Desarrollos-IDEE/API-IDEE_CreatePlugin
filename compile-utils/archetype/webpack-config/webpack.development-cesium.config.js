@@ -11,7 +11,7 @@ module.exports = {
     alias: {
       templates: path.resolve(__dirname, '../src/templates'),
       assets: path.resolve(__dirname, '../src/facade/assets'),
-      impl: path.resolve(__dirname, '../src/impl/ol/js'),
+      impl: path.resolve(__dirname, '../src/impl/cesium/js'),
       facade: path.resolve(__dirname, '../src/facade/js'),
     },
     extensions: ['.wasm', '.mjs', '.js', '.json', '.css', '.hbs', '.html'],
@@ -25,7 +25,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules\/(?!ol)|bower_components)/,
+        exclude: /(node_modules\/(?!(cesium|@cesium))|bower_components)/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -57,6 +57,14 @@ module.exports = {
         exclude: /node_modules/,
         type: 'asset/inline',
       },
+      {
+        test: /.(png|svg)$/i,
+        exclude: /node_modules/,
+        type: "asset/resource",
+        generator: {
+          filename: "images/[name][ext]",
+        },
+      },
     ],
   },
   plugins: [
@@ -72,7 +80,7 @@ module.exports = {
     hot: true,
     // open: true,
     port: 6123,
-    open: 'test/dev.html',
+    open: 'test/dev-cesium.html',
     static: {
       directory: path.join(__dirname, '/../'),
     },

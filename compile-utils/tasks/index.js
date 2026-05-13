@@ -78,13 +78,32 @@ const replaceContent = (files, name, id) => {
     },
   }
   files.forEach(file => {
-    // replaced content
-    const newContent = hbs.compile(
-      fs.readFileSync(file, {
-        encoding: 'utf-8',
-      })
-    )(hbsVar)
-    fs.outputFileSync(file, newContent)
+    let fileContent = fs.readFileSync(file, {
+      encoding: 'utf-8',
+    })
+    
+    // Protect all non-archetype variables temporarily
+    const placeholder = '__PLACEHOLDER_'
+    const nonArchetypeVarMap = new Map()
+    let placeholderIndex = 0
+    
+    // Find all {{...}} that are NOT {{archetype...}}
+    fileContent = fileContent.replace(/\{\{(?!archetype)[\s\S]*?\}\}/g, match => {
+      const placeKey = `${placeholder}${placeholderIndex++}__`
+      nonArchetypeVarMap.set(placeKey, match)
+      return placeKey
+    })
+    
+    // Compile with Handlebars (only {{archetype.*}} will be replaced)
+    const compiledContent = hbs.compile(fileContent)(hbsVar)
+    
+    // Restore non-archetype variables
+    let finalContent = compiledContent
+    nonArchetypeVarMap.forEach((originalValue, placeKey) => {
+      finalContent = finalContent.replace(placeKey, originalValue)
+    })
+    
+    fs.outputFileSync(file, finalContent)
   })
 }
 
@@ -98,6 +117,59 @@ const rename = (files, name) => {
   files.forEach(file => {
     fs.renameSync(file, file.replace(regExp, newNameRegExp))
   })
+}
+
+/**
+ * Actualiza el nombre de la familia de fuentes dentro de los archivos de fuentes (binarios)
+ * @function
+ */
+const updateFontMetadata = (fontsDir, pluginId) => {
+  let createFont
+  let woff2
+
+  const fonteditor = require('fonteditor-core')
+  createFont = fonteditor.createFont
+  woff2 = fonteditor.woff2
+
+  const nameIds = [1, 4]
+  const types = [
+    { ext: 'eot', type: 'eot' },
+    { ext: 'ji', type: 'ttf' },
+    { ext: 'woff', type: 'woff' },
+    { ext: 'woff2', type: 'woff2' },
+  ]
+
+  const processFont = (fontPath, fontType) => {
+    if (!fs.existsSync(fontPath)) return
+    const buffer = fs.readFileSync(fontPath)
+    const font = createFont(buffer, { type: fontType })
+    const fontObject = font.get()
+    if (!fontObject.name || !fontObject.name.nameRecords) return
+    fontObject.name.nameRecords.forEach(record => {
+      if (nameIds.indexOf(record.nameID) !== -1) {
+        record.value = pluginId
+      }
+    })
+    font.set(fontObject)
+    const out = font.write({ type: fontType })
+    fs.writeFileSync(fontPath, Buffer.from(out))
+  }
+
+  const run = async () => {
+    if (woff2 && typeof woff2.init === 'function') {
+      await woff2.init()
+    }
+    for (const { ext, type } of types) {
+      const fontPath = path.join(fontsDir, `${pluginId}.${ext}`)
+      try {
+        processFont(fontPath, type)
+      } catch (err) {
+        customConsole.warn(`No se pudo actualizar metadata en ${ext}: ${err.message}`)
+      }
+    }
+  }
+
+  return run()
 }
 
 /**
@@ -254,10 +326,13 @@ const taskNPMInstall = async destDir => {
  * This function creates the archetype plugin
  * @function
  */
-const createArchetype = async (srcDir, destDir, name, files) => {
+const createArchetype = async (srcDir, destDir, name, files, filesOnlyRename = []) => {
+  const id = name.toLowerCase()
   fs.copySync(srcDir, destDir)
-  replaceContent(files, name, name.toLowerCase())
-  rename(files, name.toLowerCase())
+  replaceContent(files, name, id)
+  rename([...files, ...filesOnlyRename], id)
+  const fontsDir = path.join(destDir, 'src', 'facade', 'assets', 'fonts')
+  await updateFontMetadata(fontsDir, id)
   customConsole.success(successMsg(name, destDir))
   const answerNPMInstall = await askNPMInstall()
   if (answerNPMInstall.toLowerCase() === 'y') {
@@ -282,28 +357,44 @@ const main = async () => {
     path.join(destDir, 'package.json'),
     path.join(destDir, 'README.md'),
     path.join(destDir, 'LICENSE'),
-    path.join(destDir, 'webpack-config', 'webpack.production.config.js'),
+    path.join(destDir, 'webpack-config', 'webpack.production-ol.config.js'),
+    path.join(destDir, 'webpack-config', 'webpack.production-cesium.config.js'),
     path.join(destDir, 'src', 'api.json'),
     path.join(destDir, 'src', 'facade', 'assets', 'css', 'archetype.css'),
+    path.join(destDir, 'src', 'facade', 'assets', 'css', 'fonts.css'),
+    path.join(destDir, 'src', 'facade', 'assets', 'fonts', 'archetype.svg'),
     path.join(destDir, 'src', 'facade', 'js', 'archetype.js'),
     path.join(destDir, 'src', 'facade', 'js', 'archetypecontrol.js'),
     path.join(destDir, 'src', 'impl', 'ol', 'js', 'archetypecontrol.js'),
+    path.join(destDir, 'src', 'impl', 'cesium', 'js', 'archetypecontrol.js'),
     path.join(destDir, 'src', 'templates', 'archetype.html'),
+    path.join(destDir, 'src', 'templates', 'myhelp.html'),
     path.join(destDir, 'test', 'test.js'),
     path.join(destDir, 'test', 'dev.html'),
+    path.join(destDir, 'test', 'dev-cesium.html'),
     path.join(destDir, 'test', 'prod.html'),
+    path.join(destDir, 'test', 'prod-cesium.html'),
+    path.join(destDir, 'test', 'playwright', 'ol', 'archetype-ol.html'),
+    path.join(destDir, 'test', 'playwright', 'ol', 'PLAY-01-archetype.spec.js'),
+  ]
+
+  const FONT_FILES_ONLY_RENAME = [
+    path.join(destDir, 'src', 'facade', 'assets', 'fonts', 'archetype.eot'),
+    path.join(destDir, 'src', 'facade', 'assets', 'fonts', 'archetype.ttf'),
+    path.join(destDir, 'src', 'facade', 'assets', 'fonts', 'archetype.woff'),
+    path.join(destDir, 'src', 'facade', 'assets', 'fonts', 'archetype.woff2'),
   ]
 
   const existDir = fs.existsSync(destDir)
   if (existDir === true) {
     const answer = await overrideAsk()
     if (answer.toLowerCase() === 'y') {
-      createArchetype(srcDir, destDir, capitalizeName, FILES)
+      createArchetype(srcDir, destDir, capitalizeName, FILES, FONT_FILES_ONLY_RENAME)
     } else {
       customConsole.info('Aborted task.')
     }
   } else {
-    createArchetype(srcDir, destDir, capitalizeName, FILES)
+    createArchetype(srcDir, destDir, capitalizeName, FILES, FONT_FILES_ONLY_RENAME)
   }
 }
 

@@ -8,12 +8,13 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 
 const PJSON_PATH = path.resolve(__dirname, '..', 'package.json');
 const pjson = require(PJSON_PATH);
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'production',
   entry: {
-    'basic.ol.min': path.resolve(__dirname, '..', 'src', 'index.js'),
-    [`basic-${pjson.version}.ol.min`]: path.resolve(__dirname, '..', 'src', 'index.js'),
+    '{{archetype.plugin.id}}.cesium.min': path.resolve(__dirname, '..', 'src', 'index-cesium.js'),
+    [`{{archetype.plugin.id}}-${pjson.version}.cesium.min`]: path.resolve(__dirname, '..', 'src', 'index-cesium.js'),
   },
   output: {
     path: path.resolve(__dirname, '..', 'dist'),
@@ -23,7 +24,7 @@ module.exports = {
     alias: {
       templates: path.resolve(__dirname, '../src/templates'),
       assets: path.resolve(__dirname, '../src/facade/assets'),
-      impl: path.resolve(__dirname, '../src/impl/ol/js'),
+      impl: path.resolve(__dirname, '../src/impl/cesium/js'),
       facade: path.resolve(__dirname, '../src/facade/js'),
     },
     extensions: ['.wasm', '.mjs', '.js', '.json', '.css', '.hbs', '.html'],
@@ -37,7 +38,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules\/(?!ol)|bower_components)/,
+        exclude: /(node_modules\/(?!(cesium|@cesium))|bower_components)/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -53,7 +54,8 @@ module.exports = {
       {
         test: /\.css$/,
         loader: MiniCssExtractPlugin.loader,
-      }, {
+      },
+      {
         test: /\.css$/,
         loader: 'css-loader',
       },
@@ -62,13 +64,24 @@ module.exports = {
         exclude: /node_modules/,
         type: 'asset/inline',
       },
+      {
+        test: /.(png|svg)$/i,
+        exclude: /node_modules/,
+        type: 'asset/resource',
+        generator: {
+          filename: 'images/[name][ext]',
+        },
+      },
     ],
   },
   optimization: {
     emitOnErrors: false,
     minimizer: [
-      new OptimizeCssAssetsPlugin(),
+      new OptimizeCssAssetsPlugin({
+        parallel: 1,
+      }),
       new TerserPlugin({
+        parallel: 1,
         terserOptions: {
           sourceMap: true,
         },
@@ -80,6 +93,9 @@ module.exports = {
     //   version: pjson.version,
     //   regex: /([A-Za-z]+)(\..*)/,
     // }),
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
@@ -93,10 +109,11 @@ module.exports = {
         {
           from: 'src/api.json',
           to: 'api.json',
-        }, {
-          from: 'src/facade/assets/images',
-          to: 'images',
         },
+        // {
+        //   from: 'src/facade/assets/images',
+        //   to: 'images',
+        // },
       ],
     }),
   ],

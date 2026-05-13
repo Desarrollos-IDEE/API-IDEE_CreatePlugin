@@ -1,9 +1,9 @@
 {
   "url": {
-    "name": "basic",
+    "name": "{{archetype.plugin.id}}",
     "separator": "*"
   },
-  "constructor": "IDEE.plugin.Basic",
+  "constructor": "IDEE.plugin.{{archetype.plugin.name}}",
   "parameters": [{
     "type": "object",
     "properties": [{
@@ -31,12 +31,16 @@
   }],
   "files": {
     "ol": {
-      "scripts": ["basic.ol.min.js"],
-      "styles": ["basic.ol.min.css"]
+      "scripts": ["{{archetype.plugin.id}}.ol.min.js"],
+      "styles": ["{{archetype.plugin.id}}.ol.min.css"]
+    },
+    "cesium": {
+      "scripts": ["{{archetype.plugin.id}}.cesium.min.js"],
+      "styles": ["{{archetype.plugin.id}}.cesium.min.css"]
     }
   },
   "metadata": {
-    "name": "Basic",
+    "name": "{{archetype.plugin.name}}",
     "description": "Plugin básico",
     "text": "Plantilla de plugin básico",
     "version": "1.0.0",
