@@ -6,6 +6,8 @@ import '../assets/css/fonts';
 import {{archetype.plugin.name}}Control from './{{archetype.plugin.id}}control';
 import myhelp from '../../templates/myhelp';
 import { getValue } from './i18n/language';
+import es from './i18n/es';
+import en from './i18n/en';
 
 export default class {{archetype.plugin.name}} extends IDEE.Plugin {
   /**
@@ -206,7 +208,7 @@ export default class {{archetype.plugin.name}} extends IDEE.Plugin {
    */
   static getJSONTranslations(lang) {
     if (lang === 'en' || lang === 'es') {
-      return (lang === 'en') ? 'e' : 'e';
+      return (lang === 'en') ? en : es;
     }
     return IDEE.language.getTranslation(lang).{{archetype.plugin.id}};
   }
