@@ -62,7 +62,14 @@ module.exports = {
         exclude: /node_modules/,
         type: "asset/resource",
         generator: {
-          filename: "images/[name][ext]",
+          filename: (pathData) => {
+            const resourcePath = pathData.filename.replace(/\\/g, '/');
+            const match = resourcePath.match(/\/images\/(.+)$/);
+            if (match) {
+              return `images/${match[1]}`;
+            }
+            return `images/${path.basename(resourcePath)}`;
+          },
         },
       },
     ],

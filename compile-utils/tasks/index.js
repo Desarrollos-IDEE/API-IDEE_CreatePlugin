@@ -37,11 +37,11 @@ const ASK_NPM_INSTALL =
 const ASK_PLUGIN_NAME = ' What is the name of your plugin?: '
 
 /**
- * API-CORE version question
+ * API-IDEE version question
  * @const
  */
-const ASK_API_CORE_VERSION = ' Choose API-CORE version: '
-const API_CORE_VERSIONS = ['3.3.9']
+const ASK_API_IDEE_VERSION = ' Choose API-IDEE version: '
+const API_IDEE_VERSIONS = require(path.join(parentUtils, 'versions.json'))
 
 /**
  * Override plugin question
@@ -67,13 +67,25 @@ const successMsg = (name, destDir) =>
  * plugin project with the custom class variables.
  * @function
  */
-const replaceContent = (files, name, id) => {
+const getApiIdeeUrlSuffix = (version) => {
+  if (version === 'latest') {
+    return ''
+  }
+  return `-${version}`
+}
+
+const replaceContent = (files, name, id, version, compatibility) => {
   console.log(files)
   const hbsVar = {
     archetype: {
       plugin: {
         name,
         id,
+        apiidee: {
+          version,
+          suffix: getApiIdeeUrlSuffix(version),
+          compatibility,
+        },
       },
     },
   }
@@ -308,6 +320,28 @@ const getPluginName = async () => {
 }
 
 /**
+ * This function read the users's answer to API-IDEE version
+ * @function
+ * @async
+ */
+const getApiIdeeVersion = async () => {
+  const versionKeys = Object.keys(API_IDEE_VERSIONS)
+  const getVersion = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'apiIdeeVersion',
+      message: ASK_API_IDEE_VERSION,
+      choices: versionKeys,
+    },
+  ])
+  const version = getVersion.apiIdeeVersion
+  return {
+    version,
+    compatibility: API_IDEE_VERSIONS[version],
+  }
+}
+
+/**
  * Resolve the npm install task
  * @function
  * @async
@@ -326,10 +360,10 @@ const taskNPMInstall = async destDir => {
  * This function creates the archetype plugin
  * @function
  */
-const createArchetype = async (srcDir, destDir, name, files, filesOnlyRename = []) => {
+const createArchetype = async (srcDir, destDir, name, versionInfo, files, filesOnlyRename = []) => {
   const id = name.toLowerCase()
   fs.copySync(srcDir, destDir)
-  replaceContent(files, name, id)
+  replaceContent(files, name, id, versionInfo.version, versionInfo.compatibility)
   rename([...files, ...filesOnlyRename], id)
   const fontsDir = path.join(destDir, 'src', 'facade', 'assets', 'fonts')
   await updateFontMetadata(fontsDir, id)
@@ -348,6 +382,7 @@ const createArchetype = async (srcDir, destDir, name, files, filesOnlyRename = [
  */
 const main = async () => {
   const pluginName = await getPluginName()
+  const apiIdeeVersionInfo = await getApiIdeeVersion()
   const capitalizeName = pluginName[0].toUpperCase() + pluginName.slice(1)
   const id = pluginName.toLowerCase()
   const srcDir = path.join(parentUtils, 'archetype')
@@ -365,6 +400,9 @@ const main = async () => {
     path.join(destDir, 'src', 'facade', 'assets', 'fonts', 'archetype.svg'),
     path.join(destDir, 'src', 'facade', 'js', 'archetype.js'),
     path.join(destDir, 'src', 'facade', 'js', 'archetypecontrol.js'),
+    path.join(destDir, 'src', 'facade', 'js', 'i18n', 'es.json'),
+    path.join(destDir, 'src', 'facade', 'js', 'i18n', 'en.json'),
+    path.join(destDir, 'src', 'facade', 'js', 'i18n', 'language.js'),
     path.join(destDir, 'src', 'impl', 'ol', 'js', 'archetypecontrol.js'),
     path.join(destDir, 'src', 'impl', 'cesium', 'js', 'archetypecontrol.js'),
     path.join(destDir, 'src', 'templates', 'archetype.html'),
@@ -389,12 +427,12 @@ const main = async () => {
   if (existDir === true) {
     const answer = await overrideAsk()
     if (answer.toLowerCase() === 'y') {
-      createArchetype(srcDir, destDir, capitalizeName, FILES, FONT_FILES_ONLY_RENAME)
+      createArchetype(srcDir, destDir, capitalizeName, apiIdeeVersionInfo, FILES, FONT_FILES_ONLY_RENAME)
     } else {
       customConsole.info('Aborted task.')
     }
   } else {
-    createArchetype(srcDir, destDir, capitalizeName, FILES, FONT_FILES_ONLY_RENAME)
+    createArchetype(srcDir, destDir, capitalizeName, apiIdeeVersionInfo, FILES, FONT_FILES_ONLY_RENAME)
   }
 }
 

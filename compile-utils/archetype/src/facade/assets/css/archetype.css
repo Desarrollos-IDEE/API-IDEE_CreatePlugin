@@ -1,69 +1,28 @@
 /** Estilos propios*/
 
-.m-areas>div.m-area>div.m-panel.m-plugin-{{archetype.plugin.id}}.collapsed {
-    max-height: 40px;
-}
-
-.m-areas>div.m-area>div.m-panel.m-plugin-{{archetype.plugin.id}}.opened {
-    width: max-content;
-}
-
-.m-areas>div.m-area>div.m-plugin-{{archetype.plugin.id}}.collapsed>button.m-panel-btn {
-    background-color: #71a7d3 !important;
-    font-family: '{{archetype.plugin.id}}' !important;
-}
-
-.m-areas>div.m-area>div.m-plugin-{{archetype.plugin.id}}.opened>button.m-panel-btn {
-    background-color: white !important;
-    color: #71a7d3 !important;
-}
-
-.m-areas>div.m-area.m-left>div.m-plugin-{{archetype.plugin.id}}.opened>button.m-panel-btn {
-    position: absolute;
-    right: -40px;
-    background-color: #71a7d3;
-}
-
-.m-areas>div.m-area.m-left>div.m-plugin-{{archetype.plugin.id}}.opened.no-collapsible {
-    border-radius: 4px;
-}
-
-.m-areas>div.m-area.m-right>div.m-plugin-{{archetype.plugin.id}}.opened>button.m-panel-btn {
-    position: absolute;
-    left: -40px;
-    background-color: #71a7d3;
-}
-
-.m-areas>div.m-area>div.m-plugin-{{archetype.plugin.id}}.opened>button.m-panel-btn.opened-left {
-    position: absolute;
-    right: -2.53rem;
-    left: unset !important;
-    color: #71a7d3;
-}
-
-.m-areas>div.m-area>div.m-plugin-{{archetype.plugin.id}}.opened>button.m-panel-btn.opened-right {
-    position: absolute;
-    left: -2.53rem;
-    right: unset !important;
-    color: #71a7d3;
-}
-
-#div-contenedor-m-{{archetype.plugin.id}} {
-    display: block;
-}
-
 /*********************
-     TITLE
+       GENERAL
 *********************/
 
-.m-control.m-container.m-{{archetype.plugin.id}}>div.title {
-    color: #fff !important;
-    background-color: #71a7d3;
-    font-family: 'Muli',
-        'sans-serif' !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-    font-size: 15px;
-    height: 39px;
-    line-height: 40px;
-    text-align: center;
+.m-plugin-{{archetype.plugin.id}} .m-{{archetype.plugin.id}}-container,
+.m-{{archetype.plugin.id}}-container {
+  color: var(--idee-color-neutral-70);
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px !important;
+  border-radius: 0 !important;
+  font-family: Muli, sans-serif;
+  background-color: var(--idee-color-white);
+}
+
+.m-plugin-{{archetype.plugin.id}} .m-plugin-panel-content {
+  margin: 0;
+  padding: 0;
+}
+
+.m-{{archetype.plugin.id}}-container p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--idee-color-neutral-70);
 }

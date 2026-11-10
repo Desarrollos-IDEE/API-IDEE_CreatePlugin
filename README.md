@@ -32,7 +32,7 @@ Si hemos elegido la forma global de instalación:
 $ api-idee-create-plugin
 ```
 
-Solicitará el nombre del plugin, así como la versión de API-CORE sobre la que se desee trabajar. También nos preguntará si queremos que se instalen automáticamente las dependencias del plugin.
+Solicitará el nombre del plugin, así como la versión de API-IDEE sobre la que se desee trabajar (las versiones disponibles se definen en `compile-utils/versions.json`). Cada entrada mapea la versión seleccionada (clave, usada en las URLs) con el valor de `compatibility` en `api.json`. La opción `latest` genera URLs sin versionado para consumir el último minificado publicado. También nos preguntará si queremos que se instalen automáticamente las dependencias del plugin.
 > :point_right:  <a> Para la guía de desarrollo, supondremos que hemos proporcionado el nombre de **'miPlugin'** </a>  
 
 Creará la estructura de directorios y los ficheros necesarios para la construcción de un plugin dentro de una carpeta con el nombre '_miplugin_' en el lugar donde se haya ejecutado la herramienta.

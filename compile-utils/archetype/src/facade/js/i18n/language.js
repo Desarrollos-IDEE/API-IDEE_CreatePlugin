@@ -44,7 +44,7 @@ export const getTranslation = (lang) => {
   if (lang === 'es' || lang === 'en') {
     return translations[lang];
   }
-  return IDEE.language.getTranslation(lang).basic;
+  return IDEE.language.getTranslation(lang).{{archetype.plugin.id}};
 };
 
 /**

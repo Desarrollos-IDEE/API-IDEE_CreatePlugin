@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="mapea" content="yes">
+    <meta name="api-idee" content="yes">
     <title>{{archetype.plugin.name}} Production TEST</title>
-    <link href="https://componente.idee.es/api-idee/assets/css/apiidee.cesium.min.css" rel="stylesheet" />
+    <link href="https://componentes-beta.idee.es/api-idee/assets/css/apiidee{{archetype.plugin.apiidee.suffix}}.cesium.min.css" rel="stylesheet" />
     <link href="../dist/{{archetype.plugin.id}}.cesium.min.css" rel="stylesheet" />
-    <link href="https://componentes.idee.es/api-idee/plugins/help/help.ol.min.css" rel="stylesheet" />
+    <link href="https://componentes-beta.idee.es/api-idee/plugins/help/help.cesium.min.css" rel="stylesheet" />
     <style rel="stylesheet">
         html,
         body {
@@ -19,33 +19,30 @@
             overflow: hidden;
         }
     </style>
-
 </head>
 
 <body>
     <div id="mapjs" class="container"></div>
-    <script type="text/javascript"
-        src="https://componentes.idee.es/api-idee/js/apiidee.cesium.min.js"></script>
-    <script type="text/javascript" src="https://componentes.idee.es/api-idee/js/configuration.js"></script>
+    <script type="text/javascript" src="https://componentes-beta.idee.es/api-idee/js/apiidee{{archetype.plugin.apiidee.suffix}}.cesium.min.js"></script>
+    <script type="text/javascript" src="https://componentes-beta.idee.es/api-idee/js/configuration{{archetype.plugin.apiidee.suffix}}.js"></script>
     <script type="text/javascript" src="../dist/{{archetype.plugin.id}}.cesium.min.js"></script>
-    <script type="text/javascript" src="https://componentes.idee.es/api-idee/plugins/help/help.ol.min.js"></script>
+    <script type="text/javascript"
+        src="https://componentes-beta.idee.es/api-idee/plugins/help/help.cesium.min.js"></script>
     <script type="text/javascript">
         const map = IDEE.map({
             container: 'mapjs',
         });
         window.map = map;
 
-        const mp = new IDEE.plugin.{{archetype.plugin.name}}({
-            position: 'TL', // TR, BR, TL, BL
+        const mp = new IDEE.plugin.{{ archetype.plugin.name }}({
+            position: 'right',
             collapsed: true,
-            collapsible: true,
-            tooltip: 'Plantilla',
-            isDraggable: true,
+            order: 0,
+            tooltip: 'Plantilla plugin',
         });
         window.mp = mp;
 
         map.addPlugin(mp);
-
         map.addPlugin(new IDEE.plugin.Help({}));
     </script>
 </body>

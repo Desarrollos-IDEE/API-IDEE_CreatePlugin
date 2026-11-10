@@ -4,50 +4,68 @@
     "separator": "*"
   },
   "constructor": "IDEE.plugin.{{archetype.plugin.name}}",
-  "parameters": [{
-    "type": "object",
-    "properties": [{
-      "type": "simple",
-      "name": "position",
-      "possibleValues": ["TL", "TR", "BL", "BR"],
-      "position": 0
-    }, {
-      "type": "boolean",
-      "name": "collapsed",
-      "position": 1
-    }, {
-      "type": "boolean",
-      "name": "collapsible",
-      "position": 2
-    }, {
-      "type": "simple",
-      "name": "tooltip",
-      "position": 3
-    }, {
-      "type": "boolean",
-      "name": "isDraggable",
-      "position": 4
-    }]
-  }],
+  "parameters": [
+    {
+      "type": "object",
+      "properties": [
+        {
+          "type": "simple",
+          "name": "position",
+          "position": 0,
+          "possibleValues": [
+            "left",
+            "right"
+          ]
+        },
+        {
+          "type": "boolean",
+          "name": "collapsed",
+          "position": 1
+        },
+        {
+          "type": "number",
+          "name": "order",
+          "position": 2
+        },
+        {
+          "type": "simple",
+          "name": "tooltip",
+          "position": 3
+        }
+      ]
+    }
+  ],
   "files": {
     "ol": {
-      "scripts": ["{{archetype.plugin.id}}.ol.min.js"],
-      "styles": ["{{archetype.plugin.id}}.ol.min.css"]
+      "scripts": [
+        "{{archetype.plugin.id}}.ol.min.js"
+      ],
+      "styles": [
+        "{{archetype.plugin.id}}.ol.min.css"
+      ]
     },
     "cesium": {
-      "scripts": ["{{archetype.plugin.id}}.cesium.min.js"],
-      "styles": ["{{archetype.plugin.id}}.cesium.min.css"]
+      "scripts": [
+        "{{archetype.plugin.id}}.cesium.min.js"
+      ],
+      "styles": [
+        "{{archetype.plugin.id}}.cesium.min.css"
+      ]
     }
   },
   "metadata": {
     "name": "{{archetype.plugin.name}}",
-    "description": "Plugin básico",
-    "text": "Plantilla de plugin básico",
-    "version": "1.0.0",
-    "date": "Agosto 2024",
-    "author": "Guadaltel",
+    "description": "Plugin plantilla para crear otros plugins externos",
+    "text": "Plantilla de plugin básico externo con SidePanel (API-IDEE v2)",
+    "version": "2.0.0",
+    "date": "Octubre, 2026",
+    "author": "API-IDEE Community Plugins",
     "org": "",
-    "tags": "idee,plugin",
-    "icon": "./facade/assets/icons/icons.svg"
+    "icon": "https://api-idee.juntadeandalucia.es/estaticos/Simbologia/svg/icons_cota/icn_tool.svg",
+    "centralized": true,
+    "tags": "api-idee,IDEE,plugin",
+    "compatibility": [
+      "{{archetype.plugin.apiidee.compatibility}}"
+    ]
   }
 }

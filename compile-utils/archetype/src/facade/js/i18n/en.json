@@ -1,13 +1,19 @@
 {
   "exception": {
-    "impl": "The implementation used cannot create Archetype controls."
-  },
-  "textHelp": {
-    "help1": "Example text 1.",
-    "help2": "Example text 2",
-    "help3": "Example text 3"
+    "impl": "The implementation used cannot create {{archetype.plugin.name}} controls."
   },
   "tooltip": "Plugin template",
   "title": "Plugin template",
-  "text": "Example plugin content"
+  "text": "Example plugin content. Replace this text with your plugin content.",
+  "textHelp": {
+    "squemaTitle": "{{archetype.plugin.id}}",
+    "title": "{{archetype.plugin.name}}",
+    "paragraph1": "This plugin is a sample template to create new external plugins on API-IDEE v2 with SidePanel.",
+    "paragraph2": "Open the panel from the side button, check the sample content and use it as a base for your own plugin (facade, control, styles and i18n).",
+    "screenshot1Alt": "{{archetype.plugin.name}} plugin icon on the map",
+    "screenshot1Caption": "help-01.png",
+    "screenshot2Alt": "{{archetype.plugin.name}} plugin panel open with sample content",
+    "screenshot2Caption": "help-02.png",
+    "screenshot2Description": "Expand the side panel to see the sample content. Replace templates, styles and icons when creating your plugin."
+  }
 }

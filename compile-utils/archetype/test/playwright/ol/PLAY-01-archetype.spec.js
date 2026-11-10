@@ -9,17 +9,16 @@ test('Test {{archetype.plugin.name}}', async ({ page }) => {
     window.mapjs = map;
 
     const mp = new IDEE.plugin.{{archetype.plugin.name}}({
-      position: 'TL', // TR, BR, TL, BL
+      position: 'right',
       collapsed: true,
-      collapsible: true,
+      order: 0,
       tooltip: 'Plantilla',
-      isDraggable: true,
     });
     window.mp = mp;
 
     map.addPlugin(mp);
   });
-  
+
   const nPlugins = await page.evaluate(() => window.mapjs.getPlugins().length);
   expect(nPlugins).toBe(1);
 });

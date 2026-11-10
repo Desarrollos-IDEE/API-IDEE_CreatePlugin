@@ -6,30 +6,27 @@ import {{archetype.plugin.name}}ImplControl from 'impl/{{archetype.plugin.id}}co
 import template from 'templates/{{archetype.plugin.id}}';
 import { getValue } from './i18n/language';
 
+/**
+ * @classdesc
+ * Control de ejemplo del plugin {{archetype.plugin.name}}.
+ */
 export default class {{archetype.plugin.name}}Control extends IDEE.Control {
   /**
-   * @classdesc
-   * Constructor de la clase. Crea un control {{archetype.plugin.name}}Control
-   *
    * @constructor
    * @extends {IDEE.Control}
+   * @param {Object} options control options
    * @api stable
    */
-  constructor(isDraggable) {
+  constructor(options = {}) {
     // 1. Comprueba si la implementación puede crear el control
-    if (IDEE.utils.isUndefined({{archetype.plugin.name}}ImplControl)) {
-      IDEE.exception(getValue('exceptions.impl'));
+    if (IDEE.utils.isUndefined({{archetype.plugin.name}}ImplControl)
+      || (IDEE.utils.isObject({{archetype.plugin.name}}ImplControl)
+      && IDEE.utils.isNullOrEmpty(Object.keys({{archetype.plugin.name}}ImplControl)))) {
+      IDEE.exception(getValue('exception.impl'));
     }
     // 2. Crea la implementación del control
     const impl = new {{archetype.plugin.name}}ImplControl();
-    super(impl, '{{archetype.plugin.name}}');
-
-    /**
-     * Indicador de si el plugin puede arrastrarse o no
-     * @public
-     * @type {boolean}
-     */
-    this.isDraggable_ = isDraggable || false;
+    super({{archetype.plugin.name}}Control.NAME, impl, options);
   }
 
   /**
@@ -41,20 +38,13 @@ export default class {{archetype.plugin.name}}Control extends IDEE.Control {
    * @api stable
    */
   createView(map) {
-    return new Promise((success, fail) => {
-      const html = IDEE.template.compileSync(template, {
-        vars: {
-          translations: {
-            title: getValue('title'),
-            text: getValue('text'),
-          },
+    this.map_ = map;
+    return IDEE.template.compileSync(template, {
+      vars: {
+        translations: {
+          text: getValue('text'),
         },
-      });
-
-      if (this.isDraggable_) {
-        IDEE.utils.draggabillyPlugin(this.getPanel(), '#m-{{archetype.plugin.id}}-title');
-      }
-      success(html);
+      },
     });
   }
 
@@ -70,3 +60,12 @@ export default class {{archetype.plugin.name}}Control extends IDEE.Control {
     return control instanceof {{archetype.plugin.name}}Control;
   }
 }
+
+/**
+ * Name of this control
+ * @const
+ * @type {string}
+ * @public
+ * @api stable
+ */
+{{archetype.plugin.name}}Control.NAME = '{{archetype.plugin.name}}';
